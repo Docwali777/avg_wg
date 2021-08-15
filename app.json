@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "avg_wg",
+    "slug": "avg_wg",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "avg_wg"
+}
