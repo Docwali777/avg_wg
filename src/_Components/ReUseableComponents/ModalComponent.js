@@ -35,6 +35,7 @@ const ModalComponent = ({children, modalVisible, setModalVisible, customModalSty
                     {children}
                 </View>
            </View>
+           
 
           </View>
         </View>
@@ -51,10 +52,12 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginTop: 50,
+      
       },
    
       modalView: {
-        margin: 20,
+       height: 300,  
+        margin: 10,
         marginTop: 100,
         backgroundColor: "white",
         borderRadius: 20,
@@ -67,11 +70,12 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
+        width: "90%"
       },
 icon:{
     position:"absolute" ,
     right: 20, 
-    top: 20
+    top: 20, 
 }
 })

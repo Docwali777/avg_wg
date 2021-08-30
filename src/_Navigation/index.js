@@ -9,7 +9,10 @@ import {  createDrawerNavigator } from "@react-navigation/drawer"
 import AverageWeightGainCalculator from "./AverageWeightGainCalculatorStack/AWG_index"
 
 // Screen
-import Calender1 from './AverageWeightGainCalculatorStack/Screens/Calender_1_Screen';
+// Main App Home
+import AppHome from '../_MainScreens/AppHome';
+import Creator from '../_MainScreens/Creators';
+import DisclaimerScreen from '../_MainScreens/Disclaimer';
 
 const AppStack = createDrawerNavigator()
 
@@ -19,24 +22,12 @@ const screenStyles = {
     justifyContent: "center"
 }
 
-const TitleScreen =()=>(
-    <View style={[screenStyles]}>
-        <Text>Home Screen</Text>
-    </View>
-)
 
-const WelcomScreen =()=>(
-    <View style={[screenStyles]}>
-        <Text>Home Screen</Text>
-    </View>
-)
-const DisclaimerScreen =()=>(
-    <View style={[screenStyles]}>
-        <Text>Home Screen</Text>
-    </View>
-)
+
+
 
 const AppNavigation = () => {
+
     return (
         <AppStack.Navigator>
             <AppStack.Screen 
@@ -44,8 +35,27 @@ const AppNavigation = () => {
                     headerTitle:""
                 }}
                 name="Welcome" 
-                component={WelcomScreen} 
+                component={AppHome} 
                 />
+
+            <AppStack.Screen 
+                options={{
+                    headerTitle: "Weight Gain Calc", 
+                    title: "Weight Gain Calculator"
+                }}
+            name="Average_Weight_Gain_Calculator" 
+            component={AverageWeightGainCalculator}   />
+
+
+                <AppStack.Screen 
+                options={{
+                    title: "Creator"
+                }}
+                name="Creator" 
+                component={Creator} 
+                />  
+
+            
 
                 <AppStack.Screen 
                 options={{
@@ -54,15 +64,6 @@ const AppNavigation = () => {
                 name="Disclaimer" 
                 component={DisclaimerScreen} 
                 />
-
-            
-
-            <AppStack.Screen 
-                options={{
-                    headerTitle: "Average Weight Gain Calculator", 
-                    title: "Weight Gain Calculator"
-                }}
-            name="Average_Weight_Gain_Calculator" component={AverageWeightGainCalculator}   />
 
         </AppStack.Navigator>
     )

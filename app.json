@@ -1,11 +1,26 @@
 {
   "expo": {
-    "name": "avg_wg",
+    "name": "Pediatric Calc",
     "slug": "avg_wg",
     "version": "1.0.0",
+    "privacy": "public",
+    "orientation": "portrait",
+    "icon": "./src/assets/512.png",
     "assetBundlePatterns": [
       "**/*"
-    ]
-  },
-  "name": "avg_wg"
+    ], 
+    "splash": {
+      "image": "./src/assets/512.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    }, 
+    "updates":{
+      "fallbackToCacheTimeout": 0
+    }, 
+    "ios": {
+      "supportsTable": true, 
+      "bundleIdentifier": "org.name.avgwg",
+      "buildNumber": "1.0.2" 
+    }
+  }
 }

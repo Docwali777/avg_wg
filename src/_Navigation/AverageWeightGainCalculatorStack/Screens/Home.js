@@ -9,6 +9,7 @@ import {  CalenderContext } from "../_Contexts/Context"
 import { Colors } from "../../../_Configuration/Colors"
 import HeaderText from '../../../_Components/ReUseableComponents/HeaderText'
 import ModalComponent from '../../../_Components/ReUseableComponents/ModalComponent'
+import NumberedReference from '../../../_Components/ReUseableComponents/NumberedReference'
 
 const Home= ({navigation}) => {
 
@@ -41,21 +42,24 @@ const Home= ({navigation}) => {
                 
                     
                     { displayResults ?
-                    <View style={{marginBottom: 10, alignItems: "center"}}> 
+                    <View style={{marginBottom: 5, alignItems: "center"}}> 
 
         {   date1.date === date2.date ? 
                
-                   <View style={{alignItems: "center"}}>
-                       <HeaderText customTextStyle={{color: "red", fontWeight: "600"}} >Warning</HeaderText>
-                        <Text style={{ fontSize: 18}}>Initial Date and Final Dates are the same. </Text>
+                   <View style={{alignItems: "center", width: "90%", marginBottom: 5}}>
+                       <HeaderText customTextStyle={{color: "red", fontWeight: "600", fontSize: 20}} >Warning</HeaderText>
+                        <Text style={{ fontSize: 18}}>
+                            Initial Date and Final Dates are the same. 
+                        This can causes errors in calculated values
+                        </Text>
                         
-                    <Text style={{fontSize: 18,marginBottom: 25}}>This can causes errors in calculated values </Text>
+    
                    </View>
                : 
                 
                 null}
 
-                     <HeaderText>Values-Entered</HeaderText>
+                     <HeaderText customTextStyle={{fontSize: 20}} >Values-Entered</HeaderText>
                 <View style={{marginBottom: 20, alignItems: "center"}}>
                     
                 {
@@ -66,7 +70,7 @@ const Home= ({navigation}) => {
                       
                     ].map((value, i, arr)=>{
                             return (
-                              <View key={i} style={{flexDirection:"row", borderTopWidth: 1, borderRightWidth: 1, borderLeftWidth: 1, borderBottomWidth: i=== arr.length -1 ? 1 : 0}}>
+                              <View key={i} style={{flexDirection:"row", borderTopWidth: 1, borderRightWidth: 1, borderLeftWidth: 1, borderBottomWidth: i=== arr.length -1 ? 1 : 0, width: "90%"}}>
                                   <View  style={{  width: 200, height: 35, alignItems: "center", justifyContent: "center", backgroundColor: i % 2 === 0 ? Colors.blue : Colors.lightGray}}>
                                     <Text style={{fontWeight: "600"}} >{value.day}</Text>
                                    
@@ -80,7 +84,7 @@ const Home= ({navigation}) => {
                 }
                 </View>
 
-                            <HeaderText>Results</HeaderText>
+                            <HeaderText customTextStyle={{fontSize: 20}}>Results</HeaderText>
                 {
                         [ 
                             { i: 0, type: "Interval", result: intervalDays, unit: "days"}, 
@@ -102,7 +106,35 @@ const Home= ({navigation}) => {
 
             </View> 
                 :
-                <Text>Not ready</Text>
+                <View style={{width: "75%", marginTop: 50, marginBottom: 50}}>
+                    <Text style={{fontSize: 20, marginBottom: 10}}>
+                        This app was created to simplify the calculation of "average weight"
+                        gain/loss over a period of time.                         
+                    </Text>
+                    <Text style={{fontSize: 20}}>
+                        Getting Started                        
+                    </Text>
+                   
+                    <NumberedReference
+                        number={1}
+                        infoText={"On the first Screen select the initial date and weight"}
+                    />
+                     <NumberedReference
+                        number={2}
+                        infoText={"Next input the inital weight- you can either inout grams or pounds"}
+                    />
+                    <NumberedReference
+                        number={3}
+                        infoText={`Press the  "Next Button" to navigate to the next screen to input the "Final Date and Weight' `}
+                    />
+                     <NumberedReference
+                        number={4}
+                        infoText={`Press the "Complete Button" to get the results `}
+                    />
+
+               
+
+                </View>
             }
                 <ButtonComponent title="Start" onPress={handleStart} buttonStyle={{backgroundColor: Colors.lightPurple}} />
             
@@ -143,7 +175,7 @@ const Home= ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        top: 30,  
+        top: 10,  
         alignItems: "center", 
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Keyboard, StyleSheet, Text, View } from 'react-native'
+import {Keyboard, StyleSheet, Text, View} from 'react-native'
 
 import ToggleSwitchComponent from './ToggleSwitchComponent'
 import TextInputComponent from './ReUseableComponents/TextInputComponent'
@@ -7,6 +7,8 @@ import ButtonComponent from './ReUseableComponents/ButtonComponent'
 import ModalComponent from './ReUseableComponents/ModalComponent'
 import { set } from 'react-native-reanimated'
 import HeaderText from './ReUseableComponents/HeaderText'
+
+
 
 const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
 
@@ -130,8 +132,8 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
                     setModalVisible={()=>setModalVisible(!modalVisible)}
                     customModalStyle={{height: 50, justifyContent: "center"}}
                 >
-                        <HeaderText>Error Message</HeaderText>
-                        <Text style={{fontSize: 18}} >{errorMessage}</Text>
+                        <HeaderText customTextStyle={{fontSize: 20, fontWeight: "600"}}>Error Message</HeaderText>
+                        <Text style={{fontSize: 16}} >{errorMessage}</Text>
                 </ModalComponent>
         </View  >
 

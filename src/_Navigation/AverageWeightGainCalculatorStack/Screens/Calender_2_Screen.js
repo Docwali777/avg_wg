@@ -1,5 +1,5 @@
-import React, { useEffect, useContext, useState } from 'react'
-import {StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState, useEffect, useContext, useRef } from 'react'
+import {StyleSheet, Text, TouchableOpacity, View , Animated, Keyboard} from 'react-native'
 
 //context
 import { CalenderContext } from "../_Contexts/Context"
@@ -17,25 +17,131 @@ import ButtonWithChildren from '../../../_Components/ButtonWithChildren';
 import ButtonComponent from '../../../_Components/ReUseableComponents/ButtonComponent';
 import AnimatedHeaderTitle from '../../../_Components/ReUseableComponents/AnimatedHeaderTitle';
 
+//config
+import  { Colors } from "../../../_Configuration/Colors"
+import HeaderButton from '../../../_Components/ReUseableComponents/HeaderButton';
 
 
 
-const Calender1= ({navigation}) => {
+const Calender2= ({navigation}) => {
+
+  const calenderOpacityAnim = useRef(new Animated.Value(1)).current 
+  const buttonAnimLoop = useRef(new Animated.Value(0)).current
+
+
+
+     //state
+     const [keyboardDisplay, setKeyboardDisplay] = useState(false)
+     const [size, setHeight] = useState(new Animated.Value(200))
+         
+     //context
+    const { date1, date2, setDate2, handleCalculations } = useContext(CalenderContext)
 
    useEffect(()=>{
     navigation.setOptions({
-      headerTitle:()=> date2.date ? <Text>Enter Final Weight</Text> : <AnimatedHeaderTitle>Enter End Date</AnimatedHeaderTitle>
+      headerTitle:()=> date2.weight ? <Button /> : <Text style={{fontWeight: "600", fontSize: 20}} >End Date and Weight</Text>
     })
-   })
 
-    //context
-     const { date1, date2, setDate2, handleCalculations } = useContext(CalenderContext)
+      
+    const keyboardDidShow = Keyboard.addListener("keyboardDidShow", ()=>{
+  
+      hideCalender()
+      // decreaseCalenderSize()
+    
+      
+    })
+    const keyboardDidSHide = Keyboard.addListener("keyboardDidHide", ()=>{
 
-     //state
-     const [modalVisible, setModalVisible] = useState(false)
-     const [errorMessage, setErrorMessage] = useState(null)
+      showCalender()
 
-   
+      
+    })
+    return ()=>{
+      keyboardDidShow.remove()
+      keyboardDidSHide.remove()
+    }
+   }, [keyboardDisplay, size, date1.weight])
+
+
+    //  Aniamtion fiunctions
+    const hideCalender = ()=>{
+      setKeyboardDisplay(!keyboardDisplay)
+         Animated.parallel([
+          Animated.timing(
+            calenderOpacityAnim, 
+            {
+              toValue: 0,
+              duration: 200,
+              useNativeDriver: false
+            }
+          ),
+          Animated.timing(
+            size, 
+            {
+              toValue: 0, 
+              duration: 400, 
+              useNativeDriver: false
+            }
+          )
+         ]).start()
+     
+     }
+  
+  
+     const showCalender = ()=>{
+      setKeyboardDisplay(!keyboardDisplay)
+     Animated.parallel([
+      Animated.timing(
+        calenderOpacityAnim,
+        {
+          toValue: 1,
+          duration: 900,
+          useNativeDriver: false
+        }
+      ), 
+      Animated.timing(
+        size, 
+        {
+          toValue: 200, 
+          duration: 500, 
+          useNativeDriver: false
+        }
+      )
+     ]).start();
+     
+     }
+     
+  
+  
+  
+  const Button = ()=>(
+  
+  // <TouchableOpacity 
+  //     onPress={()=>{
+  //       handleCalculations()
+  //       navigation.navigate("IntroScreen")
+  //     } }
+  //     disabled={date1.weight ? false : true} 
+  //     style={{backgroundColor: date1.weight ? Colors.lightGreen : Colors.lightGray, width: 100, height: 25, justifyContent: "center", alignItems: "center"}} >
+  //     <Text>Complete</Text>
+  //  </TouchableOpacity>
+  <HeaderButton
+        text={"Complete"}
+        onPress={()=>{
+                handleCalculations()
+                navigation.navigate("IntroScreen")
+              } }
+        disabled={date2.weight ? false : true} 
+        customStyleContainer={{backgroundColor: date1.weight ? Colors.lightGreen : Colors.lightGray}}
+  />
+  
+  
+  )
+  
+  
+
+
+
     return (
         <View  style={styles.container} >
             <View  >
@@ -47,13 +153,16 @@ const Calender1= ({navigation}) => {
                 setDate={setDate2}
              
               /> :
-              <View style={{alignItems: "center", justifyContent: "center", height: 200, marginBottom: 10,  borderBottomWidth: 1}} > 
+              
+            <Animated.View style={{opacity: calenderOpacityAnim, height: size}}>
+                <View style={{alignItems: "center", justifyContent: "center", height: 200, marginBottom: 10,  borderBottomWidth: 1}} > 
                   <Text style={{marginBottom: 10, fontSize: 20, fontWeight: "bold"}}>End Date</Text>
                   <Text style={{fontSize: 18}}>{date2.date}</Text>
            
                   <ButtonComponent title="Edit Date" onPress={()=>setDate2(prev=> ({...prev, date: null}))} />
                
               </View>
+            </Animated.View>
               }
 
       
@@ -67,23 +176,7 @@ const Calender1= ({navigation}) => {
             
         
           
-              {
-                   date2.date && date2.weight && (
-                    <View style={{justifyContent: "center", alignItems: "center",height: 100}}>
-                   
-                    <ButtonWithChildren onPress={()=>{
-                            handleCalculations()
-                            navigation.navigate("IntroScreen")
-                            }} >
-                               <Entypo name="arrow-bold-right" size={24} color="#fff" iconStyle={{width: 100}}/>
-                            <Text style={{color: "#fff", fontWeight: "700", fontSize: 21}}>Results </Text>
-                              <Entypo name="arrow-bold-right" size={24} color="#fff" iconStyle={{width: 100}}/>
-               
-                  </ButtonWithChildren>
-                  </View>
-                   )
-                 }
-             
+          
  
       
           
@@ -101,7 +194,7 @@ container: {
 })
 
 
-export default Calender1
+export default Calender2
 
 
 

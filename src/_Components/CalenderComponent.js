@@ -7,6 +7,7 @@ import {Calendar} from 'react-native-calendars';
 //Configufaration
 import { Colors } from "../_Configuration/Colors"
 import DateConfig from "../_Configuration/Dates"
+import HeaderText from './ReUseableComponents/HeaderText';
 import ModalComponent from './ReUseableComponents/ModalComponent';
 const { MM, YYYY, DD} = DateConfig
 
@@ -44,7 +45,8 @@ const CalenderComponent = ({date, setDate, handleCalenderErrors}) => {
                       }}
                />
 
-          
+          <View style={{justifyContent: "center", alignItems: "center", height: 30}}>
+          </View>
         </View>
     )
 }

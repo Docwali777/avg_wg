@@ -13,7 +13,7 @@ export default HeaderText
 
 const styles = StyleSheet.create({
     container: {
-        height: 50, 
+        height: 30, 
         alignItems: "center"
     }, 
     text:{
