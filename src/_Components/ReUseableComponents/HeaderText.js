@@ -14,9 +14,10 @@ export default HeaderText
 const styles = StyleSheet.create({
     container: {
         height: 30, 
-        alignItems: "center"
+        alignItems: "center", 
+        borderBottomWidth: 1
     }, 
     text:{
-        fontSize: 30
+        fontSize: 25
     }
 })

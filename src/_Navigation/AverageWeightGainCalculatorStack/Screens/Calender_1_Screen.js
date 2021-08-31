@@ -36,7 +36,7 @@ const Calender1= ({navigation}) => {
 
    useEffect(()=>{
     navigation.setOptions({
-      headerTitle:()=> date1?.weight  ? <Button /> : <Text style={{fontWeight: "600", fontSize: 20}}>Initial Date and Weight</Text>
+      headerTitle: ""
 
     })
    
@@ -108,17 +108,6 @@ const Calender1= ({navigation}) => {
    }
    
 
-  const btnLoop = ()=>{
-    Animated.loop(
-      Animated.timing(
-        buttonAnimLoop, 
-        {
-          toValue: 1, 
-          duration: 1500, 
-          useNativeDriver: true
-        }), {iterations: 4}
-    ).start()
-  }
 
 
 const Button = ()=>(
@@ -132,6 +121,22 @@ const Button = ()=>(
 
     return (
         <View  style={styles.container} >
+
+          <View style={styles.topView}>
+            {date1.weight && date1.date ? 
+              <Button /> : 
+              <View style={{flexDirection: "row"}}>
+                   <View style={{borderBottomWidth: 4, borderBottomColor: "#fff"}}>
+                   <Text style={styles.topViewText} >Initial </Text>
+                     </View>
+                  <Text style={styles.topViewText} >
+               Date and Weight
+                </Text>
+                </View>
+                }
+            </View>
+
+
             <View  >
          
               {
@@ -161,20 +166,7 @@ const Button = ()=>(
                     setWeight={setDate1}
                 />
             
-        
-          
-              {/* {
-                   date1.date && (date1?.weight)?.length ===4 && (
-                    <View style={{ justifyContent: "center", alignItems: "center",height: 100,}}>
-                      <ButtonWithChildren onPress={()=>navigation.navigate("Calender2")} >
-                            <Entypo name="arrow-bold-right" size={24} color="#fff" iconStyle={{width: 100}}/>
-                            <Text style={{color: "#fff", fontWeight: "700", fontSize: 21}}> Final Date and Weight </Text>
-                              <Entypo name="arrow-bold-right" size={24} color="#fff" iconStyle={{width: 100}}/>
-                      </ButtonWithChildren>
-                  </View>
-                   )
-                 }
-              */}
+  
           
         </View>
     )
@@ -182,10 +174,7 @@ const Button = ()=>(
 }
 
 const styles = StyleSheet.create({
-
-container: {
-  // alignItems: "center"
-}, 
+ 
 nextButton: {
   flexDirection: "row",
   justifyContent: "space-between",
@@ -193,6 +182,18 @@ nextButton: {
   height: 30, 
   justifyContent: "center", 
   alignItems: "center"
+}, 
+topView: {
+  width: "100%", 
+  alignItems: "center", 
+  justifyContent: "center",
+  height: 50, 
+  backgroundColor: "#000"
+}, 
+topViewText: {
+  fontWeight: "900", 
+  fontSize: 20, 
+  color: "#fff"
 }
   
 })

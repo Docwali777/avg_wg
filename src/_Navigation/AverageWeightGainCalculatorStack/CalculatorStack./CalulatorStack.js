@@ -18,6 +18,7 @@ const AVG_CalculatorStack = createNativeStackNavigator()
 const screenOptions ={
   headerBackTitle: "Back",
   animation: "none",
+  headerShown: false
 }
 
 const CalculatorStack = () => {
@@ -35,6 +36,9 @@ const CalculatorStack = () => {
                 component={Calender1} />
 
             <AVG_CalculatorStack.Screen 
+                options={{
+                  headerTitle: ""
+                }}
                 name="Calender2" 
                 component={Calender2} />
       

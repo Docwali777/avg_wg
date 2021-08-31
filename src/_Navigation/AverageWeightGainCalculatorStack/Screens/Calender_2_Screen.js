@@ -39,7 +39,8 @@ const Calender2= ({navigation}) => {
 
    useEffect(()=>{
     navigation.setOptions({
-      headerTitle:()=> date2.weight ? <Button /> : <Text style={{fontWeight: "600", fontSize: 20}} >End Date and Weight</Text>
+      headerTitleShown: false
+    
     })
 
       
@@ -115,16 +116,6 @@ const Calender2= ({navigation}) => {
   
   
   const Button = ()=>(
-  
-  // <TouchableOpacity 
-  //     onPress={()=>{
-  //       handleCalculations()
-  //       navigation.navigate("IntroScreen")
-  //     } }
-  //     disabled={date1.weight ? false : true} 
-  //     style={{backgroundColor: date1.weight ? Colors.lightGreen : Colors.lightGray, width: 100, height: 25, justifyContent: "center", alignItems: "center"}} >
-  //     <Text>Complete</Text>
-  //  </TouchableOpacity>
   <HeaderButton
         text={"Complete"}
         onPress={()=>{
@@ -144,6 +135,21 @@ const Calender2= ({navigation}) => {
 
     return (
         <View  style={styles.container} >
+
+            <View style={styles.topView}>
+            {date2.weight && date2.date ? 
+              <Button /> : 
+              <View style={{flexDirection: "row"}}>
+                   <View style={{borderBottomWidth: 4, borderBottomColor: "#fff"}}>
+                   <Text style={styles.topViewText} >End </Text>
+                     </View>
+                  <Text style={styles.topViewText} >
+               Date and Weight
+                </Text>
+                </View>
+                }
+            </View>
+
             <View  >
          
               {
@@ -174,22 +180,25 @@ const Calender2= ({navigation}) => {
                     setWeight={setDate2}
                 />
             
-        
-          
-          
- 
-      
-          
-         
+
         </View>
     )
 
 }
 
 const styles = StyleSheet.create({
-container: {
-  // alignItems: "center"
-}
+  topView: {
+    width: "100%", 
+    alignItems: "center", 
+    justifyContent: "center",
+    height: 50, 
+    backgroundColor: "#000"
+  }, 
+  topViewText: {
+    fontWeight: "900", 
+    fontSize: 20, 
+    color: "#fff"
+  }
   
 })
 

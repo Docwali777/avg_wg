@@ -5,9 +5,8 @@ import ToggleSwitchComponent from './ToggleSwitchComponent'
 import TextInputComponent from './ReUseableComponents/TextInputComponent'
 import ButtonComponent from './ReUseableComponents/ButtonComponent'
 import ModalComponent from './ReUseableComponents/ModalComponent'
-import { set } from 'react-native-reanimated'
 import HeaderText from './ReUseableComponents/HeaderText'
-
+import ButtonWithChildren from "./ButtonWithChildren"
 
 
 const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
@@ -20,6 +19,8 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
 
       const [modalVisible, setModalVisible] = useState(false)
       const [errorMessage, setErrorMessage] = useState(null)
+
+      const [displayButton, setDisplayButton] = useState(false)
 
     const _toggle = ()=>{
         settoggleKilogramsAndPounds(!toggleKilogramsAndPounds)
@@ -37,12 +38,13 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
             setWeight(prev => ({...prev, weight: grams}))
           }
           Keyboard.dismiss()
+          setDisplayButton(!displayButton)
       }
       
         const calculateWeight = ()=>{
           
           if(pounds && pounds.length > 0){
-            console.log(pounds, pounds.length);
+           
             const w = ounces !== null && ounces !== "" ?  +pounds + (+ounces/16) : +pounds
             const kg = ( w/2.2)
   
@@ -55,8 +57,10 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
           }
         
        Keyboard.dismiss()
+       setDisplayButton(!displayButton)
       }
 
+      console.log(date);
     return (
        
         <View style={[styles.lowerContainer, {display: date === null ? "none" : ""}]}>
@@ -73,12 +77,17 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
       
                 <TextInputComponent 
                     label="Grams"
-                    placeholder="Grams"
+                    placeholder="4 Digits"
                     value={grams}
                     keyboardType="number-pad"
                     constomContainerSyle={{width: 150}}
                     maxLength={4}
-                    onChangeText={grams=>setGrams(grams)}
+                    onChangeText={grams=>{
+                      if(grams.length === 4){
+                        setDisplayButton(!displayButton)
+                        setGrams(grams)
+                      }
+                    }}
                     onFocus={()=>{
                         setGrams(null)
                         setWeight(prev=>({...prev, weight: null}))
@@ -94,7 +103,12 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
                     placeholder="LBS"
                     value={pounds}
                     maxLength={3}
-                    onChangeText={pounds => setPounds(pounds)}
+                    onChangeText={pounds => {
+                      if(pounds.length){
+                        setDisplayButton(!displayButton)
+                        setPounds(pounds)
+                      }
+                    }}
                     keyboardType="number-pad"
                     constomContainerSyle={{width: 100}}
                     onFocus={()=>{
@@ -124,7 +138,20 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
 
 
 
-       <ButtonComponent title="Enter Weight" onPress={()=>toggleKilogramsAndPounds ? handleGrams() :  calculateWeight()} />
+     { 
+        displayButton ? 
+        <ButtonComponent 
+        title= {"Enter"}
+        onPress={()=>toggleKilogramsAndPounds ? handleGrams() :  calculateWeight()} 
+        /> :
+        <View>
+            <HeaderText>
+              { grams || pounds ? "Edit Weight" : "Enter weight"}
+            </HeaderText>
+       
+          </View>
+     
+     }
 
                 <ModalComponent
                     modalVisible={modalVisible}

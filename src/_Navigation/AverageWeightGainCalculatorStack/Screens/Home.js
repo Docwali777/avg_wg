@@ -106,7 +106,7 @@ const Home= ({navigation}) => {
 
             </View> 
                 :
-                <View style={{width: "75%", marginTop: 50, marginBottom: 50}}>
+                <View style={{width: "75%", marginTop: 10, marginBottom: 15}}>
                     <Text style={{fontSize: 20, marginBottom: 10}}>
                         This app was created to simplify the calculation of "average weight"
                         gain/loss over a period of time.                         
@@ -136,7 +136,10 @@ const Home= ({navigation}) => {
 
                 </View>
             }
-                <ButtonComponent title="Start" onPress={handleStart} buttonStyle={{backgroundColor: Colors.lightPurple}} />
+                <ButtonComponent 
+                    title={date2.date ? "Let's Go Again" : "Start"}
+                    onPress={handleStart} 
+                    buttonStyle={{backgroundColor: Colors.lightPurple}} />
             
 
                 
