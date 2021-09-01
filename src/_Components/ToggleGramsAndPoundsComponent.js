@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Keyboard, StyleSheet, Text, View} from 'react-native'
 
 import ToggleSwitchComponent from './ToggleSwitchComponent'
@@ -7,9 +7,11 @@ import ButtonComponent from './ReUseableComponents/ButtonComponent'
 import ModalComponent from './ReUseableComponents/ModalComponent'
 import HeaderText from './ReUseableComponents/HeaderText'
 import ButtonWithChildren from "./ButtonWithChildren"
+import { Colors } from "../_Configuration/Colors"
+import HeaderButton from './ReUseableComponents/HeaderButton'
 
 
-const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
+const ToggleGramsAndPoundsComponent = ({date, setWeight, navigateTo}) => {
 
       //toggle display for grams and pounds/ounces
       const [toggleKilogramsAndPounds, settoggleKilogramsAndPounds] = useState(true)
@@ -21,6 +23,17 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
       const [errorMessage, setErrorMessage] = useState(null)
 
       const [displayButton, setDisplayButton] = useState(false)
+      const [keyboardDisplay, setKeyboardDisplay] = useState(false)
+
+
+     
+
+      const keyboardDidShow = ()=>{
+        Keyboard.addListener("keyboardDidShow", ()=>{
+          return setKeyboardDisplay(!keyboardDisplay)
+      })
+
+      }
 
     const _toggle = ()=>{
         settoggleKilogramsAndPounds(!toggleKilogramsAndPounds)
@@ -60,7 +73,26 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
        setDisplayButton(!displayButton)
       }
 
-      console.log(date);
+      const instructionsForWeightEntry = ()=>{
+
+        return (
+          <Text>
+
+          </Text>
+        )
+      }
+
+      const Button = ()=>(
+        <HeaderButton 
+              text="Next"
+             onPress={navigateTo}
+            //  disabled={grams || pounds ? false : true} 
+             customStyleContainer={{backgroundColor: grams || pounds ? Colors.lightGreen : Colors.lightGray, borderRadius: 30, height: 40 }}
+        />
+        )
+
+      
+      console.log("togap", {date}, Boolean(date));
     return (
        
         <View style={[styles.lowerContainer, {display: date === null ? "none" : ""}]}>
@@ -77,7 +109,7 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
       
                 <TextInputComponent 
                     label="Grams"
-                    placeholder="4 Digits"
+                    placeholder="Grams"
                     value={grams}
                     keyboardType="number-pad"
                     constomContainerSyle={{width: 150}}
@@ -92,6 +124,7 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
                         setGrams(null)
                         setWeight(prev=>({...prev, weight: null}))
                     }}
+                    // autoFocus={Boolean(date)}
 
 
                 />  :
@@ -141,13 +174,25 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight}) => {
      { 
         displayButton ? 
         <ButtonComponent 
-        title= {"Enter"}
+        title= {"Submit"}
         onPress={()=>toggleKilogramsAndPounds ? handleGrams() :  calculateWeight()} 
         /> :
         <View>
-            <HeaderText>
-              { grams || pounds ? "Edit Weight" : "Enter weight"}
-            </HeaderText>
+            {
+              grams || pounds ? 
+              <View>
+              <Button text="Next" />
+                </View> :
+            
+                 
+               <ButtonComponent  
+                title="Enter Weight" 
+                buttonStyle={{backgroundColor: Colors.lightGray}}
+                textStyle={{color: "#000"}}
+                disabled={true}
+                />
+                
+            }
        
           </View>
      

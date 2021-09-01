@@ -18,7 +18,7 @@ const AVG_CalculatorStack = createNativeStackNavigator()
 const screenOptions ={
   headerBackTitle: "Back",
   animation: "none",
-  headerShown: false
+  // headerShown: false
 }
 
 const CalculatorStack = () => {

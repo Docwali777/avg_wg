@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     container: {
         height: 30, 
         alignItems: "center", 
-        borderBottomWidth: 1
+        // borderBottomWidth: 1
     }, 
     text:{
         fontSize: 25

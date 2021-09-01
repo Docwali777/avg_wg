@@ -28,7 +28,7 @@ const Calender1= ({navigation}) => {
     const buttonAnimLoop = useRef(new Animated.Value(0)).current
 
     //context
-    const { date1, setDate1} = useContext(CalenderContext)
+    const { date1, setDate1, date2} = useContext(CalenderContext)
 
     //state
     const [keyboardDisplay, setKeyboardDisplay] = useState(false)
@@ -118,13 +118,13 @@ const Button = ()=>(
      customStyleContainer={{backgroundColor: date1.weight ? Colors.lightGreen : Colors.lightGray }}
 />
 )
-
+console.log({date2});
     return (
         <View  style={styles.container} >
 
           <View style={styles.topView}>
-            {date1.weight && date1.date ? 
-              <Button /> : 
+            {/* {date1.weight && date1.date ? 
+              <Button /> :  */}
               <View style={{flexDirection: "row"}}>
                    <View style={{borderBottomWidth: 4, borderBottomColor: "#fff"}}>
                    <Text style={styles.topViewText} >Initial </Text>
@@ -133,7 +133,7 @@ const Button = ()=>(
                Date and Weight
                 </Text>
                 </View>
-                }
+                {/* } */}
             </View>
 
 
@@ -141,10 +141,15 @@ const Button = ()=>(
          
               {
                 date1.date === null ? 
-                <CalenderComponent
+               <View>
+                   <CalenderComponent
                 date={date1.date}
                 setDate={setDate1}
-              /> :
+              /> 
+               
+                 </View>
+               
+                :
               
               <Animated.View style={{opacity: calenderOpacityAnim,  height: size}}>
                 <View style={{height: 200, alignItems: "center", justifyContent: "center", marginBottom: 10,  borderBottomWidth: 1}} > 
@@ -160,12 +165,12 @@ const Button = ()=>(
       
               </View>
 
-            
                 <ToggleGramsAndPoundsComponent
                     date={date1.date}
                     setWeight={setDate1}
+                    navigateTo={()=> navigation.navigate("Calender2")}
                 />
-            
+ 
   
           
         </View>

@@ -115,7 +115,7 @@ const Home= ({navigation}) => {
                         Getting Started                        
                     </Text>
                    
-                    <NumberedReference
+                    {/* <NumberedReference
                         number={1}
                         infoText={"On the first Screen select the initial date and weight"}
                     />
@@ -130,7 +130,7 @@ const Home= ({navigation}) => {
                      <NumberedReference
                         number={4}
                         infoText={`Press the "Complete Button" to get the results `}
-                    />
+                    /> */}
 
                
 

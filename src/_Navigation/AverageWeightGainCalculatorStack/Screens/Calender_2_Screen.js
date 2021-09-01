@@ -137,8 +137,8 @@ const Calender2= ({navigation}) => {
         <View  style={styles.container} >
 
             <View style={styles.topView}>
-            {date2.weight && date2.date ? 
-              <Button /> : 
+            {/* {date2.weight && date2.date ? 
+              <Button /> :  */}
               <View style={{flexDirection: "row"}}>
                    <View style={{borderBottomWidth: 4, borderBottomColor: "#fff"}}>
                    <Text style={styles.topViewText} >End </Text>
@@ -147,7 +147,7 @@ const Calender2= ({navigation}) => {
                Date and Weight
                 </Text>
                 </View>
-                }
+                {/* } */}
             </View>
 
             <View  >
@@ -171,13 +171,17 @@ const Calender2= ({navigation}) => {
             </Animated.View>
               }
 
-      
+
               </View>
 
             
                 <ToggleGramsAndPoundsComponent
                     date={date2.date}
                     setWeight={setDate2}
+                    navigateTo={()=>{
+                      handleCalculations()
+                      navigation.navigate("IntroScreen")
+                    }}
                 />
             
 

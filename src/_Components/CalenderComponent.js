@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, Text } from 'react-native'
 
 import {Calendar} from 'react-native-calendars';
+
+//context
+import { CalenderContext} from "../_Navigation/AverageWeightGainCalculatorStack/_Contexts/Context"
 
 
 //Configufaration
@@ -14,8 +17,10 @@ const { MM, YYYY, DD} = DateConfig
 
 const CalenderComponent = ({date, setDate, handleCalenderErrors}) => {
 
-    const [calenderDate, setCalenderDate] = useState(null)
+  const { date1, date2} = useContext(CalenderContext)
 
+    const [calenderDate, setCalenderDate] = useState(null)
+console.log(date1.date);
     return (
         <View>
                           <Calendar
@@ -46,6 +51,12 @@ const CalenderComponent = ({date, setDate, handleCalenderErrors}) => {
                />
 
           <View style={{justifyContent: "center", alignItems: "center", height: 30}}>
+      
+      <View  style={{alignItems: "center", height: 35, marginTop: 20,  justifyContent: "center" }} >
+                  <Text style={{fontSize: 25}} >
+               {date1.date ? "Select END date" : "Select INITIAL date"}
+              </Text>
+                    </View>
           </View>
         </View>
     )
