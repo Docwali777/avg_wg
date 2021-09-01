@@ -140,6 +140,7 @@ const Calender2= ({navigation}) => {
             {/* {date2.weight && date2.date ? 
               <Button /> :  */}
               <View style={{flexDirection: "row"}}>
+                
                    <View style={{borderBottomWidth: 4, borderBottomColor: "#fff"}}>
                    <Text style={styles.topViewText} >End </Text>
                      </View>
@@ -174,16 +175,32 @@ const Calender2= ({navigation}) => {
 
               </View>
 
-            
-                <ToggleGramsAndPoundsComponent
+
+                 {
+                  date2.weight && date2.date ? 
+                 
+                       <View style={{height: 200, alignItems: "center", justifyContent: "center", marginBottom: 10, marginTop: 20}} > 
+                  <Text style={{marginBottom: 10, fontSize: 20, fontWeight: "bold"}}>End Weight</Text>
+                  <Text style={{fontSize: 18}}>{date2.weight} grams</Text>
+           
+                  <ButtonComponent title="Edit Weight" onPress={()=>setDate2(prev=> ({...prev, weight: null}))} />
+                  <HeaderButton 
+              text="Complete"
+              onPress={()=>{
+                handleCalculations()
+                navigation.navigate("IntroScreen")
+              }}
+            //  disabled={grams || pounds ? false : true} 
+             customStyleContainer={{backgroundColor: Colors.lightGreen, borderRadius: 30, height: 40, marginTop: 30, width: 170}}
+        />
+                    </View> : 
+                    <ToggleGramsAndPoundsComponent
                     date={date2.date}
                     setWeight={setDate2}
-                    navigateTo={()=>{
-                      handleCalculations()
-                      navigation.navigate("IntroScreen")
-                    }}
                 />
-            
+                }
+
+        
 
         </View>
     )

@@ -91,8 +91,7 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight, navigateTo}) => {
         />
         )
 
-      
-      console.log("togap", {date}, Boolean(date));
+
     return (
        
         <View style={[styles.lowerContainer, {display: date === null ? "none" : ""}]}>
@@ -124,7 +123,7 @@ const ToggleGramsAndPoundsComponent = ({date, setWeight, navigateTo}) => {
                         setGrams(null)
                         setWeight(prev=>({...prev, weight: null}))
                     }}
-                    // autoFocus={Boolean(date)}
+                    // autoFocus={true}
 
 
                 />  :

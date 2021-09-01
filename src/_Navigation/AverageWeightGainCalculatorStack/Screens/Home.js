@@ -12,7 +12,7 @@ import ModalComponent from '../../../_Components/ReUseableComponents/ModalCompon
 import NumberedReference from '../../../_Components/ReUseableComponents/NumberedReference'
 
 const Home= ({navigation}) => {
-
+console.log(navigation.pop);
             //context
         const {date1, date2, setDisplayResults, displayResults, setDate2, setDate1, intervalDays,  weightDifference, 
             averageWeightDifference} = useContext(CalenderContext)
@@ -106,14 +106,12 @@ const Home= ({navigation}) => {
 
             </View> 
                 :
-                <View style={{width: "75%", marginTop: 10, marginBottom: 15}}>
+                <View style={{width: "80%", marginTop: 10, marginBottom: 15}}>
                     <Text style={{fontSize: 20, marginBottom: 10}}>
-                        This app was created to simplify the calculation of "average weight"
-                        gain/loss over a period of time.                         
+                        This app was created to simplify the calculation of weight change 
+                         ( gain / loss ) over a period of time.                         
                     </Text>
-                    <Text style={{fontSize: 20}}>
-                        Getting Started                        
-                    </Text>
+
                    
                     {/* <NumberedReference
                         number={1}
